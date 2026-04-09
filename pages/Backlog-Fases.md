@@ -1,0 +1,77 @@
+tipo:: backlog
+estado:: activo
+version:: 1.0
+capa:: proyecto
+
+- # Backlog — Fases del Proyecto
+- ## Fase 1 — Fundamentos del Grafo
+  - estado:: TODO
+  - LATER Crear estructura base de páginas en Logseq
+  - LATER Configurar propiedades estándar (`tipo::`, `estado::`, `version::`)
+  - LATER Configurar `logseq/config.edn` con workflows y queries
+  - LATER Verificar que todas las plantillas de [[Plantillas-Logseq]] estén creadas
+  - LATER Documentar estructura en [[README-Metodologia]]
+- ## Fase 2 — Configuración MCP
+  - estado:: TODO
+  - LATER Instalar y configurar `@logseq/mcp-server`
+  - LATER Verificar conexión via test de API (ver [[MCP-Logseq-Configuracion]])
+  - LATER Documentar token y URL en secrets (no en código)
+  - LATER Agregar MCP a `.mcp.json` del proyecto
+  - LATER Testear lectura y escritura de páginas via MCP
+- ## Fase 3 — Definición de Agentes
+  - estado:: TODO
+  - LATER Escribir system prompt del orquestador
+  - LATER Escribir system prompt del validador-grafo
+  - LATER Escribir system prompt del validador-negocio
+  - LATER Escribir system prompt del analizador-requerimientos
+  - LATER Escribir system prompt del desarrollador
+  - LATER Escribir system prompt del documentador
+  - LATER Registrar todos los agentes en [[Agentes-y-Skills]]
+- ## Fase 4 — Protocolo del Orquestador
+  - estado:: TODO
+  - LATER Implementar árbol de decisión de despacho
+  - LATER Definir condiciones de escalamiento al humano
+  - LATER Definir formato de respuesta de agentes
+  - LATER Testear flujo completo con caso de uso simple
+  - LATER Documentar en [[Protocolo-Orquestador]]
+- ## Fase 5 — Pipeline Git
+  - estado:: TODO
+  - LATER Crear `.github/workflows/validate.yml`
+  - LATER Escribir `scripts/validate_properties.py`
+  - LATER Escribir `scripts/validate_links.py`
+  - LATER Escribir `scripts/check_pr_spec.py`
+  - LATER Crear `PULL_REQUEST_TEMPLATE.md`
+  - LATER Testear el pipeline con un PR de prueba
+  - LATER Documentar en [[Pipeline-Git]]
+- ## Fase 6 — Validador de Grafo
+  - estado:: TODO
+  - LATER Implementar detección de vínculos `[[...]]` rotos
+  - LATER Implementar verificación de propiedades requeridas
+  - LATER Implementar verificación de `((block-uuid))` existentes
+  - LATER Integrar validador con GitHub Actions (Fase 5)
+  - LATER Testear con casos de error intencionales
+- ## Fase 7 — Analizador de Requerimientos
+  - estado:: TODO
+  - LATER Definir formato de entrada del analizador
+  - LATER Implementar extracción de reqs desde texto libre
+  - LATER Implementar clasificación (funcional / no-funcional / restricción)
+  - LATER Implementar escritura de reqs al grafo via MCP
+  - LATER Testear con un documento de requerimientos real
+- ## Fase 8 — Integración Multi-Agente
+  - estado:: TODO
+  - LATER Testear flujo completo: nuevo req → spec → código → PR → merge
+  - LATER Verificar prompt caching activo en todos los agentes
+  - LATER Medir costos reales vs estimación de [[Estimacion-Tokens-Costos]]
+  - LATER Ajustar umbrales de escalamiento si es necesario
+  - LATER Documentar lecciones aprendidas
+- ## Fase 9 — Refinamiento y Documentación Final
+  - estado:: TODO
+  - LATER Revisar y actualizar todos los documentos del grafo
+  - LATER Verificar que no hay vínculos rotos en ninguna página
+  - LATER Generar release notes v1.0 (usar [[Plantillas-Logseq]] — Plantilla RN)
+  - LATER Evaluar posible migración parcial a GitHub Spec Kit (ver [[Comparativa-SpecKit]])
+  - LATER Actualizar [[README-Metodologia]] con estado final
+- ## Referencias
+  - [[Protocolo-Orquestador]] — Quién ejecuta estas tareas
+  - [[Agentes-y-Skills]] — Agentes responsables por fase
+  - [[README-Metodologia]] — Índice principal

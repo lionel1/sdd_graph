@@ -1,0 +1,103 @@
+name: Release Nucleo
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'pages/**'
+      - 'logseq/config.edn'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Versión semántica (ej: v1.2.0). Vacío genera/sobreescribe "latest".'
+        required: false
+        default: ''
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Determinar tag de versión
+        id: version
+        run: |
+          INPUT="${{ github.event.inputs.version }}"
+          if [ -n "$INPUT" ]; then
+            echo "tag=$INPUT" >> $GITHUB_OUTPUT
+            echo "prerelease=false" >> $GITHUB_OUTPUT
+          else
+            echo "tag=latest" >> $GITHUB_OUTPUT
+            echo "prerelease=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Colectar páginas nucleo
+        run: |
+          mkdir -p dist/pages dist/logseq dist/assets
+
+          count=0
+          for f in pages/*.md; do
+            if grep -q "^capa:: nucleo" "$f"; then
+              cp "$f" dist/pages/
+              count=$((count + 1))
+            fi
+          done
+          echo "Páginas nucleo incluidas: $count"
+
+          if [ "$count" -eq 0 ]; then
+            echo "ERROR: No se encontraron páginas con 'capa:: nucleo'."
+            exit 1
+          fi
+
+          cp logseq/config.edn dist/logseq/
+          [ -f logseq/custom.css ] && cp logseq/custom.css dist/logseq/ || true
+
+          if [ "$(ls assets/ 2>/dev/null)" ]; then
+            cp assets/* dist/assets/
+          fi
+
+      - name: Agregar bootstrap y VERSION
+        run: |
+          cp scripts/bootstrap.sh dist/bootstrap.sh
+          chmod +x dist/bootstrap.sh
+          echo "${{ steps.version.outputs.tag }}" > dist/VERSION
+
+      - name: Empaquetar release
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          cd dist && zip -r "../sdd-nucleo-${TAG}.zip" .
+          echo "Contenido del release:"
+          unzip -l "../sdd-nucleo-${TAG}.zip"
+
+      - name: Publicar release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: "SDD Nucleo ${{ steps.version.outputs.tag }}"
+          prerelease: ${{ steps.version.outputs.prerelease }}
+          body: |
+            ## Vault base — Metodología SDD-Agentes
+
+            Contiene todas las páginas `capa:: nucleo` del sistema.
+
+            ### Uso rápido
+            ```bash
+            unzip sdd-nucleo-${{ steps.version.outputs.tag }}.zip -d sdd-nucleo
+            cd sdd-nucleo
+            chmod +x bootstrap.sh
+            ./bootstrap.sh mi-proyecto ~/proyectos
+            ```
+            Luego: **Logseq → Add graph → `~/proyectos/mi-proyecto`**
+
+            ### Contenido
+            - Páginas de metodología (`capa:: nucleo`)
+            - Configuración Logseq (`config.edn`)
+            - Assets de documentación
+            - Script `bootstrap.sh`
+
+            ### Documentación
+            Ver página `[[Crear-Nuevo-Proyecto]]` en el vault para la guía completa.
+          files: sdd-nucleo-*.zip

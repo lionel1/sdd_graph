@@ -1,0 +1,6 @@
+logseq/bak/
+logseq/.recycle/
+logseq/version-files/
+.DS_Store
+Thumbs.db
+Prompt*.txt
