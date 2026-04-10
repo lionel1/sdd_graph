@@ -1,0 +1,46 @@
+name: Validate SDD Graph
+
+on:
+  pull_request:
+    branches: [main, dev]
+    paths:
+      - 'pages/**'
+      - 'scripts/**'
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  validate-graph:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Validar propiedades de páginas (V-001, V-004, V-005, V-006)
+        run: |
+          python scripts/validate_properties.py pages/
+
+      - name: Validar vínculos internos (V-002)
+        run: |
+          python scripts/validate_links.py pages/
+
+      - name: Verificar referencia a spec en el PR (R-003)
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: |
+          python scripts/check_pr_spec.py "$PR_BODY"
+
+      - name: Resumen
+        if: always()
+        run: |
+          echo "──────────────────────────────────────"
+          echo "Validación SDD completada."
+          echo "Ver logs individuales para detalles."
+          echo "──────────────────────────────────────"
