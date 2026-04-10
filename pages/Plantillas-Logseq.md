@@ -128,6 +128,43 @@ capa:: nucleo
     - ## Referencias
       - [[Manifiesto-SDD-Agentes]]
     ```
+- ## Plantilla SPEC
+  - **Uso**: Especificación de software de un módulo o funcionalidad. Es el artefacto central del flujo SDD (P-001 Spec-First).
+  - ```
+    tipo:: especificacion
+    estado:: borrador
+    version:: 1.0
+    id:: SPEC-XXX
+    proyecto:: [[README-Proyecto]]
+    
+    - # SPEC-XXX — Nombre del Módulo o Funcionalidad
+    - ## Descripción
+      - Qué problema resuelve esta especificación y por qué existe.
+    - ## Objetivos
+      - Objetivo 1
+    - ## Requerimientos Funcionales
+      - [[REQ-001]] — descripción corta
+    - ## Requerimientos No Funcionales
+      - Performance:
+      - Seguridad:
+    - ## Restricciones
+      - Restricción técnica o de negocio relevante.
+    - ## Agentes Involucrados
+      - | Agente | Acción |
+        |--------|--------|
+        | analizador-requerimientos | Extrae los REQ de esta spec |
+        | validador-negocio | Valida consistencia de esta spec |
+        | desarrollador | Implementa según esta spec |
+    - ## Criterios de Aceptación
+      - [ ] Criterio 1
+    - ## Estado de Implementación
+      - estado-spec:: borrador
+      - fecha-aprobacion::
+      - pr-referencia::
+    - ## Referencias
+      - Origen: [[README-Proyecto]]
+      - [[Manifiesto-SDD-Agentes]] — P-001 Spec-First
+    ```
 - ## Referencias
   - [[Manifiesto-SDD-Agentes]] — DD-006 establece el uso de plantillas
   - [[README-Metodologia]] — Índice principal

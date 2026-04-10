@@ -11,6 +11,7 @@ capa:: proyecto
 	- ### Motivación
 		- [[Grafo-como-fuente-de-verdad-utilizando-Logseq]] — Por qué Logseq como fuente de verdad y el rol del MCP
 		- [[Logseq-Calidad-del-Contexto-Humano]] — Fundamento teórico desde psicología cognitiva, aprendizaje y lingüística computacional
+		- [[Descripcion Logseq Grafos]]  — Descripción del sistema de persistencia
 	- ### Fundamentos
 		- [[Manifiesto-SDD-Agentes]] — Principios, restricciones y decisiones de diseño
 		- [[Glosario-Metodologia]] — Términos clave del sistema
@@ -27,7 +28,8 @@ capa:: proyecto
 		- [[Comparativa-SpecKit]] — Comparativa con GitHub Spec Kit (DEC-001)
 		- [[Estimacion-Tokens-Costos]] — Proyección de costos por escenario
 		- [[Plantillas-Logseq]] — Plantillas estándar del sistema
-		- [[Backlog-Fases]] — Fases 1–9 con todas las tareas
+		- [[Tareas]] — Tareas activas del proyecto con anatomía completa (tipo, estado, conocimiento)
+		- [[Backlog-Fases]] — Fases 1–9 con todas las subtareas
 	- ### Estructura del Grafo
 		- [[La-definicion-de-tareas]] — Anatomía de un nodo de tarea y sistema de etiquetas
 		- [[Plantilla-de-tareas]] — Plantilla estándar para nodos de tarea

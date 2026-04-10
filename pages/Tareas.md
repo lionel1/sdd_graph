@@ -1,0 +1,95 @@
+tipo:: índice-tareas
+estado:: activo
+version:: 1.0
+capa:: proyecto
+proyecto:: [[README-Metodologia]]
+
+- # Tareas del Proyecto
+	- ## Fase 1 — Fundamentos del Grafo
+		- DONE Crear estructura base de páginas nucleo en Logseq
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: completada
+			- conocimiento-relacionado:: [[Capas-del-Sistema]] [[Plantillas-Logseq]] [[Manifiesto-SDD-Agentes]]
+			- aprendizaje:: La separación nucleo/proyecto debe declararse con `capa::` desde el inicio — agregarla retroactivamente a 22 páginas requirió editar cada archivo individualmente.
+		- DONE Implementar pipeline de release nucleo con GitHub Actions
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: completada
+			- conocimiento-relacionado:: [[Configuracion-GitHub-Actions]] [[Capas-del-Sistema]] [[Crear-Nuevo-Proyecto]]
+			- aprendizaje:: El grep debe anclarse con `^capa:: nucleo` para evitar falsos positivos en páginas que mencionan `capa:: proyecto` dentro de su contenido.
+		- DONE Verificar config.edn — queries de journal y custom views activos
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: completada
+			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]] [[La-estructura-etiquetas]]
+			- aprendizaje:: Todos los settings documentados en CLAUDE.md están activos: workflow :now, queries NOW/NEXT, custom views pprint y sort-by-priority, triple-lowbar y start-of-week 6.
+	- ## Fase 2 — Configuración MCP
+		- NOW Instalar y configurar `@logseq/mcp-server`
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: activa
+			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]]
+			- aprendizaje::
+		- NOW Verificar conexión MCP via test de API (curl)
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: activa
+			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]]
+			- aprendizaje::
+		- LATER Agregar MCP a `.mcp.json` del proyecto y testear lectura/escritura
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]] [[Skills-de-Agentes]]
+			- aprendizaje::
+	- ## Fase 3 — Definición de Agentes
+		- LATER Escribir system prompt del orquestador con prompt caching
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[Protocolo-Orquestador]] [[Agentes-y-Skills]] [[Skills-de-Agentes]] [[Estimacion-Tokens-Costos]]
+			- aprendizaje::
+		- LATER Escribir system prompts de los 5 agentes restantes
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[Agentes-y-Skills]] [[Skills-de-Agentes]] [[Manifiesto-SDD-Agentes]]
+			- aprendizaje::
+		- LATER Registrar agentes adicionales si se definen nuevos
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[Agregar-Agente-y-Skills]]
+			- aprendizaje::
+	- ## Fase 4 — Protocolo del Orquestador
+		- LATER Implementar árbol de decisión de despacho en código
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[Protocolo-Orquestador]] [[Skills-de-Agentes]] [[Agentes-y-Skills]]
+			- aprendizaje::
+		- LATER Testear flujo completo orquestador → agente → respuesta
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[Protocolo-Orquestador]] [[MCP-Logseq-Configuracion]]
+			- aprendizaje::
+	- ## Fase 5 — Pipeline Git
+		- LATER Crear `.github/workflows/validate.yml` con validadores de grafo
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[Pipeline-Git]] [[Manifiesto-SDD-Agentes]] [[Agentes-y-Skills]]
+			- aprendizaje::
+		- LATER Escribir scripts de validación de propiedades y vínculos
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: pausada
+			- conocimiento-relacionado:: [[Pipeline-Git]] [[La-estructura-etiquetas]] [[La-definicion-de-tareas]]
+			- aprendizaje::
+	- ## Ver también
+		- [[Backlog-Fases]] — vista por fases con todas las subtareas
+		- [[La-definicion-de-tareas]] — anatomía completa del nodo de tarea
+		- [[La-estructura-etiquetas]] — etiquetas de estado para queries MCP
+		- [[Plantilla-de-tareas]] — plantilla para agregar tareas nuevas
