@@ -15,7 +15,7 @@ agente:: orquestador
 	- | Página | Por qué se cachea |
 	  |--------|-------------------|
 	  | `Manifiesto-SDD-Agentes` | Principios y restricciones que gobiernan toda decisión |
-	  | `Agentes-y-Skills` | Lista completa de los 7 agentes, dominios y triggers |
+	  | `Agentes-y-Skills` | Lista completa de los 8 agentes, dominios y triggers |
 	  | `Skills-de-Agentes` | Catálogo de skills invocables con inputs y outputs |
 	  | `Protocolo-Orquestador` | Árbol de decisión, reglas de prioridad y formato de respuesta |
 	  | `Estimacion-Tokens-Costos` | Umbral de alerta de costo por sesión ($2.00) |
@@ -35,7 +35,8 @@ agente:: orquestador
 	  │
 	  ├─ ¿Es una spec con estado:: aprobado lista para implementar?
 	  │   ├─ → Despachar primero: validador-grafo (verificación pre-código)
-	  │   └─ → Si ok: despachar desarrollador
+	  │   ├─ → Si ok: despachar desarrollador
+	  │   └─ → Tras PR del desarrollador: despachar tester
 	  │
 	  ├─ ¿Es un cambio a una spec existente?
 	  │   ├─ → Despachar primero: validador-negocio
@@ -52,8 +53,9 @@ agente:: orquestador
 	- **P1 — Escalamiento humano**: Siempre tiene prioridad máxima. Ningún flujo continúa sin aprobación humana cuando se activa.
 	- **P2 — Validación antes de acción**: El validador-grafo corre antes que el desarrollador o el documentador.
 	- **P3 — Negocio antes que técnico**: El validador-negocio corre antes que el desarrollador.
-	- **P4 — Documentación al final**: El documentador siempre es el último agente del flujo.
-	- **P5 — Un agente por dominio a la vez**: No despachás dos instancias del mismo agente en paralelo.
+	- **P4 — Tests antes de merge**: El tester corre después del desarrollador y antes del validador-grafo pre-merge.
+	- **P5 — Documentación al final**: El documentador siempre es el último agente del flujo.
+	- **P6 — Un agente por dominio a la vez**: No despachás dos instancias del mismo agente en paralelo.
 - ## Cómo Invocar un Agente
 	- Para despachar un agente, enviás un mensaje con esta estructura:
 	- ```json
@@ -110,7 +112,7 @@ agente:: orquestador
 	- **No saltés validaciones.** R-002 del [[Manifiesto-SDD-Agentes]]: el validador-grafo corre antes de todo merge.
 - ## Referencias
 	- [[Protocolo-Orquestador]] — Árbol de decisión y reglas de prioridad completas
-	- [[Agentes-y-Skills]] — Definición de los 7 agentes
+	- [[Agentes-y-Skills]] — Definición de los 8 agentes
 	- [[Skills-de-Agentes]] — Catálogo de skills invocables
 	- [[Estimacion-Tokens-Costos]] — Umbrales de costo y estrategia de caching
 	- [[Manifiesto-SDD-Agentes]] — Principios y restricciones que gobiernan este agente
