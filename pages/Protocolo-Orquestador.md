@@ -9,6 +9,9 @@ capa:: nucleo
   - ```
     INPUT del usuario
     │
+    ├─ ¿Es una pregunta sobre la metodología, plantillas, agentes o convenciones?
+    │   └─ → Despachar: consultor-metodologia
+    │
     ├─ ¿Es un documento/texto para analizar?
     │   └─ → Despachar: analizador-requerimientos
     │
