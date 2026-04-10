@@ -1,6 +1,6 @@
 tipo:: índice-tareas
 estado:: activo
-version:: 1.0
+version:: 1.1
 capa:: proyecto
 proyecto:: [[README-Metodologia]]
 
@@ -44,24 +44,30 @@ proyecto:: [[README-Metodologia]]
 			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]] [[Skills-de-Agentes]]
 			- aprendizaje::
 	- ## Fase 3 — Definición de Agentes
-		- LATER Escribir system prompt del orquestador con prompt caching
+		- DONE Escribir system prompt del orquestador con prompt caching
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: pausada
+			- estado:: completada
 			- conocimiento-relacionado:: [[Protocolo-Orquestador]] [[Agentes-y-Skills]] [[Skills-de-Agentes]] [[Estimacion-Tokens-Costos]]
-			- aprendizaje::
-		- LATER Escribir system prompts de los 5 agentes restantes
+			- aprendizaje:: El orquestador maneja dos canales distintos: JSON para invocar agentes y lenguaje natural para responder al usuario. Mantiene además el contador de costo de sesión.
+		- DONE Escribir system prompts de los 7 agentes especializados
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: pausada
+			- estado:: completada
 			- conocimiento-relacionado:: [[Agentes-y-Skills]] [[Skills-de-Agentes]] [[Manifiesto-SDD-Agentes]]
-			- aprendizaje::
-		- LATER Registrar agentes adicionales si se definen nuevos
+			- aprendizaje:: Cada prompt define explícitamente qué escribe y qué no. La separación escritura-vault vs escritura-git vs solo-lectura es la restricción más importante de cada agente.
+		- DONE Registrar agente tester (nuevo — surgió del análisis de gaps)
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: pausada
-			- conocimiento-relacionado:: [[Agregar-Agente-y-Skills]]
-			- aprendizaje::
+			- estado:: completada
+			- conocimiento-relacionado:: [[Agentes-y-Skills]] [[Skills-de-Agentes]] [[Pipeline-Git]]
+			- aprendizaje:: El desarrollador generaba tests como subproducto. Un agente dedicado garantiza cobertura 1:1 con criterios de aceptación de los REQs y habilita tests de regresión independientes.
+		- DONE Crear Referencia-Agentes — guía rápida comparativa
+			- tipo:: tarea
+			- proyecto:: [[README-Metodologia]]
+			- estado:: completada
+			- conocimiento-relacionado:: [[Referencia-Agentes]] [[Agentes-y-Skills]]
+			- aprendizaje:: Las tablas comparativas (roles, skills, caché, bloqueos, errores) son el artefacto más consultado por usuarios nuevos — vale tenerlas en una sola página.
 	- ## Fase 4 — Protocolo del Orquestador
 		- LATER Implementar árbol de decisión de despacho en código
 			- tipo:: tarea

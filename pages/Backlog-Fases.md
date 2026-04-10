@@ -1,32 +1,41 @@
 tipo:: backlog
 estado:: activo
-version:: 1.0
+version:: 1.1
 capa:: proyecto
 
 - # Backlog — Fases del Proyecto
 - ## Fase 1 — Fundamentos del Grafo
-  - estado:: TODO
-  - LATER Crear estructura base de páginas en Logseq
-  - LATER Configurar propiedades estándar (`tipo::`, `estado::`, `version::`)
-  - LATER Configurar `logseq/config.edn` con workflows y queries
-  - LATER Verificar que todas las plantillas de [[Plantillas-Logseq]] estén creadas
-  - LATER Documentar estructura en [[README-Metodologia]]
+  - estado:: completada
+  - DONE Crear estructura base de páginas en Logseq
+  - DONE Configurar propiedades estándar (`tipo::`, `estado::`, `version::`)
+  - DONE Configurar `logseq/config.edn` con workflows y queries
+  - DONE Verificar que todas las plantillas de [[Plantillas-Logseq]] estén creadas
+  - DONE Documentar estructura en [[README-Metodologia]]
+  - DONE Implementar pipeline de release nucleo ([[Configuracion-GitHub-Actions]])
+  - DONE Agregar `README_FIRST.md` al release con guía de uso
+  - DONE Crear `README.md` del repositorio GitHub
+  - DONE Crear [[Plantilla-SPEC]] (capa:: nucleo)
 - ## Fase 2 — Configuración MCP
-  - estado:: TODO
-  - LATER Instalar y configurar `@logseq/mcp-server`
-  - LATER Verificar conexión via test de API (ver [[MCP-Logseq-Configuracion]])
+  - estado:: en-progreso
+  - NOW Instalar y configurar `@logseq/mcp-server`
+  - NOW Verificar conexión via test de API (ver [[MCP-Logseq-Configuracion]])
   - LATER Documentar token y URL en secrets (no en código)
   - LATER Agregar MCP a `.mcp.json` del proyecto
   - LATER Testear lectura y escritura de páginas via MCP
 - ## Fase 3 — Definición de Agentes
-  - estado:: TODO
-  - LATER Escribir system prompt del orquestador
-  - LATER Escribir system prompt del validador-grafo
-  - LATER Escribir system prompt del validador-negocio
-  - LATER Escribir system prompt del analizador-requerimientos
-  - LATER Escribir system prompt del desarrollador
-  - LATER Escribir system prompt del documentador
-  - LATER Registrar todos los agentes en [[Agentes-y-Skills]]
+  - estado:: completada
+  - DONE Registrar 8 agentes en [[Agentes-y-Skills]] con roles, triggers y skills
+  - DONE Registrar agente consultor-metodologia (nuevo — consulta viva del vault)
+  - DONE Registrar agente tester (nuevo — cobertura 1:1 con criterios de aceptación)
+  - DONE Escribir system prompt del orquestador ([[SystemPrompt-Orquestador]])
+  - DONE Escribir system prompt del consultor-metodologia ([[SystemPrompt-Consultor-Metodologia]])
+  - DONE Escribir system prompt del validador-grafo ([[SystemPrompt-Validador-Grafo]])
+  - DONE Escribir system prompt del validador-negocio ([[SystemPrompt-Validador-Negocio]])
+  - DONE Escribir system prompt del analizador-requerimientos ([[SystemPrompt-Analizador-Requerimientos]])
+  - DONE Escribir system prompt del desarrollador ([[SystemPrompt-Desarrollador]])
+  - DONE Escribir system prompt del tester ([[SystemPrompt-Tester]])
+  - DONE Escribir system prompt del documentador ([[SystemPrompt-Documentador]])
+  - DONE Crear [[Referencia-Agentes]] — guía comparativa para usuarios
 - ## Fase 4 — Protocolo del Orquestador
   - estado:: TODO
   - LATER Implementar árbol de decisión de despacho
