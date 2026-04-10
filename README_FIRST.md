@@ -10,34 +10,48 @@ Este paquete contiene todo lo necesario para inicializar un nuevo proyecto usand
 
 ```
 sdd-nucleo-vX.Y.Z/
-├── README_FIRST.md        ← este archivo
-├── VERSION                ← versión del nucleo
-├── bootstrap.sh           ← script de inicialización
-├── pages/                 ← páginas de metodología (capa:: nucleo)
+├── README_FIRST.md           <- este archivo
+├── VERSION                   <- version del nucleo
+├── bootstrap.sh              <- script de inicializacion
+├── scripts/
+│   ├── validate_properties.py  <- valida propiedades de paginas (V-001 a V-006)
+│   ├── validate_links.py       <- valida vinculos [[...]] internos (V-002)
+│   └── check_pr_spec.py        <- verifica referencia a spec en PRs (R-003)
+├── pages/                    <- paginas de metodologia (capa:: nucleo)
 │   ├── Manifiesto-SDD-Agentes.md
 │   ├── Agentes-y-Skills.md
+│   ├── Referencia-Agentes.md      <- guia rapida comparativa de agentes
 │   ├── Plantillas-Logseq.md
 │   ├── Plantilla-SPEC.md
 │   ├── Protocolo-Orquestador.md
-│   └── ... (17 páginas en total)
+│   ├── SystemPrompt-Orquestador.md
+│   ├── SystemPrompt-Consultor-Metodologia.md
+│   ├── SystemPrompt-Validador-Grafo.md
+│   ├── SystemPrompt-Validador-Negocio.md
+│   ├── SystemPrompt-Analizador-Requerimientos.md
+│   ├── SystemPrompt-Desarrollador.md
+│   ├── SystemPrompt-Tester.md
+│   ├── SystemPrompt-Documentador.md
+│   └── ... (resto del nucleo)
 ├── logseq/
-│   └── config.edn         ← configuración de Logseq
-└── assets/                ← recursos compartidos
+│   └── config.edn            <- configuracion de Logseq
+└── assets/                   <- recursos compartidos
 ```
 
 ---
 
-## Inicio rápido (5 minutos)
+## Inicio rapido (5 minutos)
 
 ### Requisitos previos
 
 - [Logseq](https://logseq.com/) desktop instalado
+- Python 3.8+ (para los scripts de validacion)
 - bash disponible (Git Bash en Windows, terminal en Mac/Linux)
 
 ### Paso 1 — Ejecutar el bootstrap
 
 ```bash
-# dar permisos de ejecución (Mac/Linux)
+# dar permisos de ejecucion (Mac/Linux)
 chmod +x bootstrap.sh
 
 # crear el vault del proyecto
@@ -58,10 +72,10 @@ El script crea la estructura del vault en `~/proyectos/mi-app/`.
 
 ### Paso 3 — Configurar el proyecto
 
-Abrir la página `README-mi-app` generada por el bootstrap y:
+Abrir la pagina `README-mi-app` generada por el bootstrap y:
 
-1. Reemplazar la descripción placeholder con la descripción del proyecto
-2. Agregar las primeras páginas específicas del proyecto
+1. Reemplazar la descripcion placeholder con la descripcion del proyecto
+2. Agregar las primeras paginas especificas del proyecto
 
 ---
 
@@ -69,51 +83,81 @@ Abrir la página `README-mi-app` generada por el bootstrap y:
 
 El sistema trabaja con dos capas:
 
-| Capa | Descripción |
+| Capa | Descripcion |
 |------|-------------|
-| `nucleo` | Metodología base — estas páginas, no se modifican |
-| `proyecto` | Contenido específico del proyecto — se crea sobre el nucleo |
+| `nucleo` | Metodologia base — estas paginas, no se modifican |
+| `proyecto` | Contenido especifico del proyecto — se crea sobre el nucleo |
 
-Las páginas nucleo incluidas son solo lectura de metodología. Las páginas propias del proyecto se crean con `capa:: proyecto`.
+Las paginas nucleo son solo lectura de metodologia. Las paginas propias del proyecto se crean con `capa:: proyecto`.
 
 ## Plantillas disponibles
 
-Todas las páginas nuevas deben crearse usando una de estas plantillas (ver `Plantillas-Logseq`):
+Todas las paginas nuevas deben crearse usando una de estas plantillas (ver `Plantillas-Logseq`):
 
 | Prefijo | Uso |
 |---------|-----|
-| `README-` | Índice o documentación principal de un módulo |
-| `SPEC-` | Especificación de software (artefacto central del flujo SDD) |
+| `README-` | Indice o documentacion principal de un modulo |
+| `SPEC-` | Especificacion de software (artefacto central del flujo SDD) |
 | `REQ-` | Requerimiento funcional o no funcional |
-| `DOC-` | Documentación técnica o funcional detallada |
+| `DOC-` | Documentacion tecnica o funcional detallada |
 | `TASK-` | Tarea del backlog |
-| `DEC-` | Decision log de arquitectura o diseño |
+| `DEC-` | Decision log de arquitectura o diseno |
 
 ## Agentes del sistema
 
-El orquestador coordina estos agentes especializados:
+El orquestador coordina estos 8 agentes especializados:
 
 | Agente | Responsabilidad |
 |--------|----------------|
-| `orquestador` | Punto de entrada — despacha al agente correcto |
+| `orquestador` | Punto de entrada — coordina todos los agentes |
+| `consultor-metodologia` | Responde preguntas sobre el sistema leyendo el vault en tiempo real |
 | `analizador-requerimientos` | Extrae REQs desde texto libre |
-| `validador-grafo` | Verifica integridad estructural del grafo |
-| `validador-negocio` | Verifica consistencia semántica de specs |
-| `desarrollador` | Genera código desde specs aprobadas |
+| `validador-negocio` | Verifica consistencia semantica de specs |
+| `validador-grafo` | Verifica integridad estructural del vault |
+| `desarrollador` | Genera codigo desde specs aprobadas |
+| `tester` | Genera tests basados en criterios de aceptacion de REQs |
 | `documentador` | Actualiza el grafo tras merges exitosos |
+
+Ver `Referencia-Agentes` en el vault para la guia comparativa completa.
+
+## Pipeline de validacion de PRs
+
+El paquete incluye tres scripts de validacion que se ejecutan automaticamente en cada PR (via GitHub Actions) y pueden correrse localmente antes de hacer commit:
+
+| Script | Que verifica | Sale con error si... |
+|--------|--------------|----------------------|
+| `validate_properties.py` | `tipo::`, `estado::`, `version::`, `capa::` en cada pagina | Pagina `nucleo` sin propiedades requeridas |
+| `validate_links.py` | Todos los `[[vinculos]]` internos del vault | Algun vinculo apunta a pagina inexistente |
+| `check_pr_spec.py` | Cuerpo del PR tiene referencia `((uuid))` a spec | PR sin referencia a bloque del grafo |
+
+### Correr validaciones localmente
+
+```bash
+# desde la raiz del vault del proyecto
+python scripts/validate_properties.py pages/
+python scripts/validate_links.py pages/
+python scripts/check_pr_spec.py "Descripcion del PR ((uuid-de-la-spec))"
+```
+
+Todos deben terminar con exit 0 antes de abrir el PR.
+
+### Como configurar GitHub Actions en tu proyecto
+
+Copiar `.github/workflows/validate.yml` a tu repositorio. Se activa automaticamente en cada PR hacia `main` o `dev`.
 
 ---
 
-## Próximos pasos
+## Proximos pasos
 
 Una vez abierto el vault en Logseq:
 
 1. Leer `Manifiesto-SDD-Agentes` — principios y restricciones del sistema
-2. Leer `Crear-Nuevo-Proyecto` — guía detallada paso a paso
-3. Configurar el MCP de Logseq para conectar agentes al vault (ver `MCP-Logseq-Configuracion`)
-4. Crear la primera spec del proyecto usando la plantilla `SPEC-`
+2. Leer `Referencia-Agentes` — guia rapida de los 8 agentes
+3. Leer `Crear-Nuevo-Proyecto` — guia detallada paso a paso
+4. Configurar el MCP de Logseq para conectar agentes al vault (ver `MCP-Logseq-Configuracion`)
+5. Crear la primera spec del proyecto usando la plantilla `SPEC-`
 
 ---
 
-Versión del nucleo: ver archivo `VERSION`
+Version del nucleo: ver archivo `VERSION`
 Repositorio: https://github.com/lionel1/sdd_graph

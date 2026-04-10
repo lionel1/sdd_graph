@@ -75,12 +75,20 @@ capa:: proyecto
     - El validador-negocio aprobó los cambios de specs (si aplica)
     - Aprobación humana explícita (en casos de alto impacto, según [[Protocolo-Orquestador]])
 - ## Scripts de Validación
-  - Los scripts en `scripts/` son invocados por GitHub Actions y también pueden ejecutarse localmente.
-  - | Script | Propósito |
-    |--------|-----------|
-    | `validate_properties.py` | Verifica `tipo::`, `estado::`, `version::` en cada página |
-    | `validate_links.py` | Detecta vínculos `[[...]]` rotos |
-    | `check_pr_spec.py` | Verifica que el PR referencie una spec del grafo |
+  - Los scripts en `scripts/` son invocados por GitHub Actions y también pueden ejecutarse localmente antes de abrir un PR.
+  - | Script | Propósito | Errores que detecta |
+    |--------|-----------|---------------------|
+    | `validate_properties.py` | Verifica `tipo::`, `estado::`, `version::`, `capa::` en cada página | V-001 (crítico), V-004, V-005, V-006 |
+    | `validate_links.py` | Detecta vínculos `[[...]]` rotos (excluye bloques de código y placeholders) | V-002 (crítico) |
+    | `check_pr_spec.py` | Verifica que el PR contenga al menos una referencia `((uuid))` a spec | R-003 (crítico) |
+  - ### Uso local
+    - ```bash
+      # desde la raíz del vault del proyecto
+      python scripts/validate_properties.py pages/
+      python scripts/validate_links.py pages/
+      python scripts/check_pr_spec.py "Descripción del PR con ((uuid-de-la-spec))"
+      ```
+    - Todos deben terminar con exit 0 antes de abrir el PR.
 - ## Referencias
   - [[Estructura-Proyecto]] — Estructura de ramas y PR template
   - [[Agentes-y-Skills]] — Agentes que interactúan con el pipeline
