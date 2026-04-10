@@ -52,6 +52,7 @@ capa:: nucleo
 - ## Impacto por Agente
 	- | Agente | Operaciones MCP usadas |
 	  |--------|----------------------|
+	  | consultor-metodologia | `getPage`, `getAllPages`, `DB.q` (lectura intensiva de nucleo) |
 	  | validador-grafo | `getAllPages`, `getPage`, `DB.q` |
 	  | validador-negocio | `getPage`, `DB.q` |
 	  | analizador-requerimientos | `createPage`, `insertBlock` |

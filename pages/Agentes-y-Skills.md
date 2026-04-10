@@ -8,11 +8,27 @@ capa:: nucleo
   - | Agente | Dominio | Trigger Principal |
     |--------|---------|-------------------|
     | orquestador | Coordinación general | Toda interacción del usuario |
+    | consultor-metodologia | Consulta viva del vault y la metodología | Pregunta sobre el sistema o convención |
     | validador-grafo | Integridad del grafo Logseq | Pre-merge, post-edición |
     | validador-negocio | Consistencia de specs | Nueva spec o cambio de req |
     | analizador-requerimientos | Extracción de reqs | Documento de entrada nuevo |
     | desarrollador | Generación de código | Spec aprobada |
     | documentador | Generación de docs | Merge a main exitoso |
+- ## Agente: Consultor-Metodologia
+  - **Rol**: Fuente de consulta viva sobre la metodología SDD y el estado del vault. Responde preguntas sobre cómo funciona el sistema leyendo directamente el grafo.
+  - **Responsabilidades**:
+    - Resolver preguntas sobre la metodología (principios, flujos, restricciones)
+    - Indicar qué plantilla, etiqueta o convención usar ante una situación concreta
+    - Listar agentes, skills y plantillas disponibles en el estado actual del vault
+    - Verificar que una página o propiedad cumple las convenciones del sistema
+  - **Por qué es crítico**:
+    - Los demás agentes conocen la metodología por su system prompt (estático). Este agente la consulta en tiempo real — si el vault evoluciona, la respuesta es siempre la actual.
+    - Desacopla al orquestador de tener que conocer la metodología completa.
+  - **Triggers**:
+    - Pregunta del usuario sobre cómo usar el sistema
+    - Orquestador necesita confirmar una convención antes de despachar
+    - Cualquier agente necesita verificar una regla del [[Manifiesto-SDD-Agentes]]
+  - **Skills**: `consulta-vault`, `lectura-MCP`, `query-Datalog` — ver [[Skills-de-Agentes]]
 - ## Agente: Orquestador
   - **Rol**: Punto de entrada único. Interpreta la intención del usuario y despacha al agente correcto.
   - **Responsabilidades**:

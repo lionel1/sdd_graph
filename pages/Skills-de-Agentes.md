@@ -30,15 +30,23 @@ capa:: nucleo
 				- input:: condición de alto impacto detectada por cualquier agente
 				- output:: pausa del flujo + notificación al humano con contexto suficiente
 				- descripción:: implementa P-005 del [[Manifiesto-SDD-Agentes]]. Se activa ante operaciones irreversibles o conflictos entre specs aprobadas.
+		- ### Consulta — consultor-metodologia
+			- **`consulta-vault`**
+				- agente:: consultor-metodologia
+				- tipo:: lectura-MCP
+				- input:: pregunta en lenguaje natural sobre la metodología, una convención, un agente o una plantilla
+				- output:: respuesta fundamentada en el contenido actual del vault (páginas leídas vía MCP)
+				- depende-de:: `lectura-MCP`, `query-Datalog`
+				- descripción:: skill central del consultor. Lee las páginas nucleo relevantes (Manifiesto, Agentes-y-Skills, Plantillas-Logseq, etc.) para responder con el estado actual del sistema — no con el estado al momento de escribir el system prompt. Garantiza que la respuesta sea siempre consistente con el vault real.
 		- ### Lectura-MCP — agentes de consulta
 			- **`lectura-MCP`**
-				- agentes:: validador-grafo, validador-negocio, desarrollador
+				- agentes:: consultor-metodologia, validador-grafo, validador-negocio, desarrollador
 				- input:: nombre de página o UUID de bloque
 				- output:: contenido del nodo con sus propiedades y vínculos
 				- depende-de:: [[MCP-Logseq-Configuracion]]
 				- descripción:: recupera páginas y bloques del grafo vía `logseq.Editor.getPage` o `getBlock`. Base de casi todo flujo de consulta.
 			- **`query-Datalog`**
-				- agentes:: validador-grafo, validador-negocio
+				- agentes:: consultor-metodologia, validador-grafo, validador-negocio
 				- input:: query en sintaxis Datalog (string)
 				- output:: conjunto de bloques que satisfacen la query
 				- depende-de:: `lectura-MCP`
@@ -119,17 +127,18 @@ capa:: nucleo
 		- ```
 		  FLUJO: spec nueva → validación → código → PR
 		  
-		  1. extracción-reqs       (analizador)
-		  2. clasificación          (analizador)
-		  3. formato-Logseq         (analizador)
-		  4. escritura-MCP          (analizador → grafo)
-		  5. validación-specs       (validador-negocio)
-		  6. análisis-semántico     (validador-negocio)
-		  7. generación-código      (desarrollador)
-		  8. creación-PR            (desarrollador)
-		  9. validación-estructura  (validador-grafo, pre-merge)
-		  10. generación-docs       (documentador, post-merge)
-		  11. actualización-grafo   (documentador)
+		  0. consulta-vault         (consultor, si el orquestador necesita confirmar convención)
+		  1. extracción-reqs        (analizador)
+		  2. clasificación           (analizador)
+		  3. formato-Logseq          (analizador)
+		  4. escritura-MCP           (analizador → grafo)
+		  5. validación-specs        (validador-negocio)
+		  6. análisis-semántico      (validador-negocio)
+		  7. generación-código       (desarrollador)
+		  8. creación-PR             (desarrollador)
+		  9. validación-estructura   (validador-grafo, pre-merge)
+		  10. generación-docs        (documentador, post-merge)
+		  11. actualización-grafo    (documentador)
 		  ```
 		- Cada paso es orquestado por `despacho`. Si cualquier validación falla, se activa `reporte-errores` o `escalamiento` según la severidad.
 	- ## Ver también
