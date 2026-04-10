@@ -19,7 +19,8 @@ capa:: nucleo
     │   └─ → Despachar: validador-grafo (modo lectura)
     │
     ├─ ¿Es una spec aprobada lista para implementar?
-    │   └─ → Despachar: desarrollador
+    │   ├─ → Despachar: desarrollador
+    │   └─ → Tras PR del desarrollador: despachar tester
     │
     ├─ ¿Es un cambio a una spec existente?
     │   ├─ → Despachar: validador-negocio (primero)
@@ -35,8 +36,9 @@ capa:: nucleo
   - **P1 — Escalamiento humano**: Siempre tiene prioridad máxima. El orquestador detiene todo flujo hasta recibir aprobación.
   - **P2 — Validación antes de acción**: El validador-grafo se ejecuta antes que el desarrollador o documentador.
   - **P3 — Negocio antes que técnico**: El validador-negocio se ejecuta antes que el desarrollador.
-  - **P4 — Documentación al final**: El documentador siempre es el último en ejecutarse.
-  - **P5 — Un agente a la vez por dominio**: No se despachan dos instancias del mismo agente en paralelo.
+  - **P4 — Tests antes de merge**: El tester corre después del desarrollador y antes del validador-grafo pre-merge.
+  - **P5 — Documentación al final**: El documentador siempre es el último en ejecutarse.
+  - **P6 — Un agente a la vez por dominio**: No se despachan dos instancias del mismo agente en paralelo.
 - ## Condiciones de Escalamiento al Humano
   - Eliminar o modificar una spec con `estado:: aprobado`
   - Merge a `main` con errores no críticos del validador-grafo

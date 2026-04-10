@@ -40,7 +40,7 @@ capa:: nucleo
 				- descripción:: skill central del consultor. Lee las páginas nucleo relevantes (Manifiesto, Agentes-y-Skills, Plantillas-Logseq, etc.) para responder con el estado actual del sistema — no con el estado al momento de escribir el system prompt. Garantiza que la respuesta sea siempre consistente con el vault real.
 		- ### Lectura-MCP — agentes de consulta
 			- **`lectura-MCP`**
-				- agentes:: consultor-metodologia, validador-grafo, validador-negocio, desarrollador
+				- agentes:: consultor-metodologia, validador-grafo, validador-negocio, desarrollador, tester
 				- input:: nombre de página o UUID de bloque
 				- output:: contenido del nodo con sus propiedades y vínculos
 				- depende-de:: [[MCP-Logseq-Configuracion]]
@@ -98,6 +98,21 @@ capa:: nucleo
 				- output:: reqs con tipo, prioridad y ID asignados
 				- depende-de:: `extracción-reqs`
 				- descripción:: asigna `tipo::`, `prioridad::` e `id::` a cada requerimiento. Prepara los datos para `formato-Logseq`.
+		- ### Testing — tester
+			- **`generación-tests`**
+				- agente:: tester
+				- tipo:: generación
+				- input:: criterios de aceptación de los REQs + código del PR (rama feat/)
+				- output:: archivos de test agregados al branch del PR
+				- depende-de:: `lectura-MCP`
+				- descripción:: lee los criterios de aceptación de cada REQ referenciado en el PR y genera tests automatizados que los verifican. Cada criterio debe tener al menos un test. Genera también tests de casos borde derivados del criterio.
+			- **`validación-cobertura`**
+				- agente:: tester
+				- tipo:: validación
+				- input:: tests generados + lista de criterios de aceptación de los REQs
+				- output:: reporte de cobertura: criterios cubiertos vs sin cobertura
+				- depende-de:: `generación-tests`
+				- descripción:: verifica que cada criterio de aceptación tiene al menos un test asociado. Los criterios sin cobertura se reportan como errores que bloquean el merge.
 		- ### Generación — desarrollador y documentador
 			- **`formato-Logseq`**
 				- agente:: analizador-requerimientos
@@ -125,20 +140,22 @@ capa:: nucleo
 				- descripción:: se activa post-merge. Mantiene el grafo sincronizado con el código real. Usa las plantillas de [[Plantillas-Logseq]].
 	- ## Composición de skills en un flujo típico
 		- ```
-		  FLUJO: spec nueva → validación → código → PR
+		  FLUJO: spec nueva → validación → código → tests → merge → docs
 		  
-		  0. consulta-vault         (consultor, si el orquestador necesita confirmar convención)
-		  1. extracción-reqs        (analizador)
-		  2. clasificación           (analizador)
-		  3. formato-Logseq          (analizador)
-		  4. escritura-MCP           (analizador → grafo)
-		  5. validación-specs        (validador-negocio)
-		  6. análisis-semántico      (validador-negocio)
-		  7. generación-código       (desarrollador)
-		  8. creación-PR             (desarrollador)
-		  9. validación-estructura   (validador-grafo, pre-merge)
-		  10. generación-docs        (documentador, post-merge)
-		  11. actualización-grafo    (documentador)
+		  0.  consulta-vault         (consultor, si el orquestador necesita confirmar convención)
+		  1.  extracción-reqs        (analizador)
+		  2.  clasificación           (analizador)
+		  3.  formato-Logseq          (analizador)
+		  4.  escritura-MCP           (analizador → grafo)
+		  5.  validación-specs        (validador-negocio)
+		  6.  análisis-semántico      (validador-negocio)
+		  7.  generación-código       (desarrollador)
+		  8.  creación-PR             (desarrollador)
+		  9.  generación-tests        (tester)
+		  10. validación-cobertura    (tester)
+		  11. validación-estructura   (validador-grafo, pre-merge)
+		  12. generación-docs         (documentador, post-merge)
+		  13. actualización-grafo     (documentador)
 		  ```
 		- Cada paso es orquestado por `despacho`. Si cualquier validación falla, se activa `reporte-errores` o `escalamiento` según la severidad.
 	- ## Ver también

@@ -53,6 +53,7 @@ capa:: nucleo
 	- | Agente | Operaciones MCP usadas |
 	  |--------|----------------------|
 	  | consultor-metodologia | `getPage`, `getAllPages`, `DB.q` (lectura intensiva de nucleo) |
+	  | tester | `getPage` (lectura de REQs y criterios de aceptación) |
 	  | validador-grafo | `getAllPages`, `getPage`, `DB.q` |
 	  | validador-negocio | `getPage`, `DB.q` |
 	  | analizador-requerimientos | `createPage`, `insertBlock` |

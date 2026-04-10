@@ -13,6 +13,7 @@ capa:: nucleo
     | validador-negocio | Consistencia de specs | Nueva spec o cambio de req |
     | analizador-requerimientos | Extracción de reqs | Documento de entrada nuevo |
     | desarrollador | Generación de código | Spec aprobada |
+    | tester | Generación y validación de tests | PR del desarrollador listo |
     | documentador | Generación de docs | Merge a main exitoso |
 - ## Agente: Consultor-Metodologia
   - **Rol**: Fuente de consulta viva sobre la metodología SDD y el estado del vault. Responde preguntas sobre cómo funciona el sistema leyendo directamente el grafo.
@@ -83,6 +84,22 @@ capa:: nucleo
     - Spec con `estado:: aprobado` en el grafo
     - Solicitud explícita del orquestador
   - **Skills**: `generación-código`, `creación-PR`, `lectura-MCP` — ver [[Skills-de-Agentes]]
+- ## Agente: Tester
+  - **Rol**: Genera y valida los tests que verifican que el código implementado cumple los criterios de aceptación de los REQs.
+  - **Responsabilidades**:
+    - Leer los criterios de aceptación de cada REQ referenciado en el PR
+    - Generar tests automatizados que cubran cada criterio
+    - Validar cobertura: todo criterio de aceptación debe tener al menos un test
+    - Detectar casos borde no cubiertos por el desarrollador
+    - Agregar los tests al branch del PR antes del merge
+  - **Por qué es un agente separado**:
+    - El desarrollador genera código orientado a la implementación; el tester la verifica desde los criterios del REQ
+    - Separa la responsabilidad de "qué hace el código" (desarrollador) de "cómo verificamos que lo hace bien" (tester)
+    - Permite generar tests de regresión para código existente sin invocar al desarrollador
+  - **Triggers**:
+    - PR del desarrollador abierto y listo (con código generado)
+    - Solicitud explícita de tests de regresión sobre código existente
+  - **Skills**: `generación-tests`, `validación-cobertura`, `lectura-MCP` — ver [[Skills-de-Agentes]]
 - ## Agente: Documentador
   - **Rol**: Genera y actualiza documentación tras cambios exitosos.
   - **Responsabilidades**:
