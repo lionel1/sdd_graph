@@ -12,10 +12,12 @@ capa:: proyecto
 		- [[Grafo-como-fuente-de-verdad-utilizando-Logseq]] — Por qué Logseq como fuente de verdad y el rol del MCP
 		- [[Logseq-Calidad-del-Contexto-Humano]] — Fundamento teórico desde psicología cognitiva, aprendizaje y lingüística computacional
 		- [[Descripcion Logseq Grafos]]  — Descripción del sistema de persistencia
+		- [[Evaluacion-Critica]] — Evaluación crítica 1–10 del sistema: fortalezas, limitaciones y proyección
 	- ### Fundamentos
 		- [[Manifiesto-SDD-Agentes]] — Principios, restricciones y decisiones de diseño
 		- [[Glosario-Metodologia]] — Términos clave del sistema
 	- ### Arquitectura y Agentes
+		- [[Referencia-Agentes]] — Guía rápida comparativa: roles, skills, caché, errores y flujo completo
 		- [[Agentes-y-Skills]] — Roles, responsabilidades y triggers de cada agente
 		- [[Skills-de-Agentes]] — Catálogo de skills: anatomía, inputs, outputs y composición en flujos
 		- [[Agregar-Agente-y-Skills]] — Guía y checklist para registrar un agente nuevo con sus skills
