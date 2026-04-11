@@ -16,12 +16,12 @@ capa:: proyecto
   - DONE Crear `README.md` del repositorio GitHub
   - DONE Crear [[Plantilla-SPEC]] (capa:: nucleo)
 - ## Fase 2 — Configuración MCP
-  - estado:: en-progreso
-  - NOW Instalar y configurar `@logseq/mcp-server`
-  - NOW Verificar conexión via test de API (ver [[MCP-Logseq-Configuracion]])
-  - LATER Documentar token y URL en secrets (no en código)
-  - LATER Agregar MCP a `.mcp.json` del proyecto
-  - LATER Testear lectura y escritura de páginas via MCP
+  - estado:: completada
+  - DONE Instalar y configurar `@logseq/mcp-server`
+  - DONE Verificar conexión via test de API (ver [[MCP-Logseq-Configuracion]])
+  - DONE Documentar token y URL en secrets (no en código)
+  - DONE Agregar MCP a `.mcp.json` del proyecto
+  - DONE Testear lectura y escritura de páginas via MCP
 - ## Fase 3 — Definición de Agentes
   - estado:: completada
   - DONE Registrar 8 agentes en [[Agentes-y-Skills]] con roles, triggers y skills
@@ -44,14 +44,14 @@ capa:: proyecto
   - LATER Testear flujo completo con caso de uso simple
   - LATER Documentar en [[Protocolo-Orquestador]]
 - ## Fase 5 — Pipeline Git
-  - estado:: TODO
-  - LATER Crear `.github/workflows/validate.yml`
-  - LATER Escribir `scripts/validate_properties.py`
-  - LATER Escribir `scripts/validate_links.py`
-  - LATER Escribir `scripts/check_pr_spec.py`
-  - LATER Crear `PULL_REQUEST_TEMPLATE.md`
-  - LATER Testear el pipeline con un PR de prueba
-  - LATER Documentar en [[Pipeline-Git]]
+  - estado:: completada
+  - DONE Crear `.github/workflows/validate.yml`
+  - DONE Escribir `scripts/validate_properties.py`
+  - DONE Escribir `scripts/validate_links.py`
+  - DONE Escribir `scripts/check_pr_spec.py`
+  - DONE Crear `PULL_REQUEST_TEMPLATE.md`
+  - DONE Testear el pipeline con un PR de prueba
+  - DONE Documentar en [[Pipeline-Git]]
 - ## Fase 6 — Validador de Grafo
   - estado:: TODO
   - LATER Implementar detección de vínculos `[[...]]` rotos

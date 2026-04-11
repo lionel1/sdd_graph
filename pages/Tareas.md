@@ -25,24 +25,24 @@ proyecto:: [[README-Metodologia]]
 			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]] [[La-estructura-etiquetas]]
 			- aprendizaje:: Todos los settings documentados en CLAUDE.md están activos: workflow :now, queries NOW/NEXT, custom views pprint y sort-by-priority, triple-lowbar y start-of-week 6.
 	- ## Fase 2 — Configuración MCP
-		- NOW Instalar y configurar `@logseq/mcp-server`
+		- DONE Instalar y configurar `@logseq/mcp-server`
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: activa
+			- estado:: completada
 			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]]
-			- aprendizaje::
-		- NOW Verificar conexión MCP via test de API (curl)
+			- aprendizaje:: El token se pasa por variable de entorno `LOGSEQ_API_TOKEN` — nunca hardcodeado en `.mcp.json` (R-005).
+		- DONE Verificar conexión MCP via test de API (curl)
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: activa
+			- estado:: completada
 			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]]
-			- aprendizaje::
-		- LATER Agregar MCP a `.mcp.json` del proyecto y testear lectura/escritura
+			- aprendizaje:: Conexión verificada en http://localhost:12315. Plugin HTTP API debe estar activo antes de lanzar el MCP.
+		- DONE Agregar MCP a `.mcp.json` del proyecto y testear lectura/escritura
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: pausada
+			- estado:: completada
 			- conocimiento-relacionado:: [[MCP-Logseq-Configuracion]] [[Skills-de-Agentes]]
-			- aprendizaje::
+			- aprendizaje:: `.mcp.json` en la raíz del repo con `stdio` transport. Funcional con Claude Code y otros clientes MCP.
 	- ## Fase 3 — Definición de Agentes
 		- DONE Escribir system prompt del orquestador con prompt caching
 			- tipo:: tarea
@@ -82,16 +82,16 @@ proyecto:: [[README-Metodologia]]
 			- conocimiento-relacionado:: [[Protocolo-Orquestador]] [[MCP-Logseq-Configuracion]]
 			- aprendizaje::
 	- ## Fase 5 — Pipeline Git
-		- LATER Crear `.github/workflows/validate.yml` con validadores de grafo
+		- DONE Crear `.github/workflows/validate.yml` con validadores de grafo
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: pausada
+			- estado:: completada
 			- conocimiento-relacionado:: [[Pipeline-Git]] [[Manifiesto-SDD-Agentes]] [[Agentes-y-Skills]]
 			- aprendizaje::
-		- LATER Escribir scripts de validación de propiedades y vínculos
+		- DONE Escribir scripts de validación de propiedades y vínculos
 			- tipo:: tarea
 			- proyecto:: [[README-Metodologia]]
-			- estado:: pausada
+			- estado:: completada
 			- conocimiento-relacionado:: [[Pipeline-Git]] [[La-estructura-etiquetas]] [[La-definicion-de-tareas]]
 			- aprendizaje::
 	- ## Ver también
