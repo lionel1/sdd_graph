@@ -13,6 +13,7 @@ capa:: proyecto
 		- [[Logseq-Calidad-del-Contexto-Humano]] — Fundamento teórico desde psicología cognitiva, aprendizaje y lingüística computacional
 		- [[Descripcion Logseq Grafos]]  — Descripción del sistema de persistencia
 		- [[Evaluacion-Critica]] — Evaluación crítica 1–10 del sistema: fortalezas, limitaciones y proyección
+			- [[Alternativas-Mejora]] — Opciones para superar las limitaciones del MCP y la complejidad operativa
 	- ### Fundamentos
 		- [[Manifiesto-SDD-Agentes]] — Principios, restricciones y decisiones de diseño
 		- [[Glosario-Metodologia]] — Términos clave del sistema
