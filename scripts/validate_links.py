@@ -44,8 +44,14 @@ LOGSEQ_BUILTIN = {"contents", "card", "query", "tags"}
 
 
 def strip_code_blocks(content):
-    """Elimina bloques de código (``` ... ```) para no procesar sus vínculos."""
-    return re.sub(r'```[\s\S]*?```', '', content)
+    """Elimina bloques de código y código inline para no procesar sus vínculos."""
+    # Primero bloques cercados (``` ... ```) — orden importante: antes que inline
+    content = re.sub(r'```[\s\S]*?```', '', content)
+    # Luego código inline con backtick doble (``...``)
+    content = re.sub(r'``[^`]+``', '', content)
+    # Luego código inline con backtick simple (`...`)
+    content = re.sub(r'`[^`\n]+`', '', content)
+    return content
 
 
 def extract_links(content):

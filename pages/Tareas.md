@@ -99,3 +99,4 @@ proyecto:: [[README-Metodologia]]
 		- [[La-definicion-de-tareas]] — anatomía completa del nodo de tarea
 		- [[La-estructura-etiquetas]] — etiquetas de estado para queries MCP
 		- [[Plantilla-de-tareas]] — plantilla para agregar tareas nuevas
+- test-mcp:: conexion verificada OK
